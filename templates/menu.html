@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restaurant Menu</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Restaurant Menu</h1>
+            <p>Discover our delicious menu items</p>
+            
+            <!-- Cart Button to navigate to cart page -->
+            <a href="{{ url_for('cart') }}"><button id="cartButton"><span class="cart-icon">&#128722;</span>Go to Cart (0)</button></a>
+        </header>
+
+        <!-- Filter section -->
+        <div class="filters">
+            <select id="categoryFilter">
+                <option value="">Select Category</option>
+                <option value="veg">Veg</option>
+                <option value="non-veg">Non-Veg</option>
+            </select>
+
+            <select id="subcategoryFilter">
+                <option value="">Select Subcategory</option>
+                <option value="starter">Starters</option>
+                <option value="biryani">Biryani</option>
+                <option value="curries">Curries</option>
+                <option value="milkshakes">Milkshakes</option>
+                <option value="icecreams">Ice creams</option>
+            </select>
+        </div>
+
+        <section class="menu">
+            <!-- Menu items will be dynamically inserted here -->
+        </section>
+    </div>
+
+    <script>
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        // Fetch menu items from the API
+        async function fetchMenuItems() {
+            try {
+                const categoryFilter = document.getElementById('categoryFilter').value;
+                const subcategoryFilter = document.getElementById('subcategoryFilter').value;
+                const url = new URL('http://127.0.0.1:5000/api/menu', window.location.origin);
+
+                // Adding query parameters for filters
+                if (categoryFilter) {
+                    url.searchParams.append('category', categoryFilter);
+                }
+                if (subcategoryFilter) {
+                    url.searchParams.append('subcategory', subcategoryFilter);
+                }
+
+                const response = await fetch(url);
+                const menuData = await response.json();
+
+                const menuSection = document.querySelector('.menu');
+                menuSection.innerHTML = ''; // Clear previous content
+
+                menuData.forEach(item => {
+                    const menuItem = document.createElement('div');
+                    menuItem.classList.add('menu-item');
+
+                    const finalPrice = (item.price - (item.discount || 0)).toFixed(2);
+
+                    menuItem.innerHTML = `
+                        <img src="${item.image_path}" alt="${item.name}">
+                        <div class="info">
+                            <h3>${item.name}</h3>
+                            <p>${item.description}</p>
+                            <p class="price">$${finalPrice}</p>
+                            ${item.discount > 0 ? `<p class="discount">$${item.price.toFixed(2)}</p>` : ''}
+                            <button onclick="addToCart(${item.id}, '${item.name}', ${finalPrice}, 1)">Add to Cart</button>
+                        </div>
+                    `;
+
+                    menuSection.appendChild(menuItem);
+                });
+            } catch (error) {
+                console.error('Error fetching menu items:', error);
+            }
+        }
+
+        // Add an item to the cart
+        function addToCart(itemId, itemName, itemPrice, quantity) {
+            const existingItem = cart.find(item => item.id === itemId);
+            if (existingItem) {
+                existingItem.quantity += quantity;
+            } else {
+                cart.push({ id: itemId, name: itemName, price: parseFloat(itemPrice), quantity: quantity });
+            }
+
+            // Store the updated cart in localStorage
+            localStorage.setItem('cart', JSON.stringify(cart));
+
+            // Update the Cart button text with the number of items
+            document.getElementById('cartButton').innerHTML = `<span class="cart-icon">&#128722;</span> Cart (${cart.length})`;
+        }
+
+        // Add event listeners to filters
+        document.getElementById('categoryFilter').addEventListener('change', fetchMenuItems);
+        document.getElementById('subcategoryFilter').addEventListener('change', fetchMenuItems);
+
+        // Update the cart button text when the page loads
+        window.onload = function() {
+            fetchMenuItems();
+            document.getElementById('cartButton').innerHTML = `<span class="cart-icon">&#128722;</span> View Cart (${cart.length})`;
+        }
+    </script>
+
+</body>
+</html>

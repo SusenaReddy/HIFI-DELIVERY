@@ -1,0 +1,233 @@
+/* General Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #fff8f0; /* Soft white background */
+    color: #333; /* Dark text for contrast */
+    line-height: 1.8;
+    padding: 20px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 50px auto;
+    padding: 40px;
+    background: linear-gradient(145deg, #fff2e6, #ffe8d9); /* Orange-toned gradient */
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    border-radius: 12px;
+    position: relative;
+    overflow: hidden;
+}
+
+h2 {
+    font-size: 2.4em;
+    margin-bottom: 20px;
+    color: #ff6600; /* Bright orange */
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-shadow: 2px 2px 6px rgba(255, 102, 0, 0.3);
+}
+
+.form-section,
+.menu-items-section {
+    margin-bottom: 60px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+form input, form textarea, form select, form button {
+    width: 100%;
+    padding: 16px;
+    border: 1px solid #ffa366; /* Light orange border */
+    border-radius: 10px;
+    font-size: 1.1em;
+    background-color: #fff6ed; /* Light orange background */
+    color: #333; /* Dark text */
+    transition: all 0.3s ease;
+}
+
+form input[type="file"] {
+    padding: 12px;
+    background-color: #ffe0cc; /* Slightly darker file input */
+    border-radius: 8px;
+}
+
+form input:focus, form select:focus, form textarea:focus {
+    border-color: #ff6600; /* Orange focus */
+    box-shadow: 0 0 8px rgba(255, 102, 0, 0.4);
+    outline: none;
+}
+
+form button {
+    background-color: #ff6600;
+    color: white;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2em;
+    font-weight: 700;
+    transition: all 0.4s ease-out;
+    position: relative;
+    overflow: hidden;
+}
+
+form button:before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 300%;
+    height: 300%;
+    background-color: #cc5200;
+    transition: all 0.5s ease;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+}
+
+form button:hover {
+    background-color: #cc5200;
+}
+
+form button:hover:before {
+    opacity: 1;
+    width: 400%;
+    height: 400%;
+}
+
+form button:active {
+    transform: scale(0.98);
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 40px;
+    transition: all 0.3s ease;
+}
+
+table th, table td {
+    padding: 18px;
+    text-align: left;
+    border-bottom: 2px solid #ffe0cc; /* Light orange border */
+    text-transform: uppercase;
+    font-weight: 600;
+}
+
+table th {
+    background-color: #ff6600;
+    color: white;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease-in-out;
+}
+
+table tr {
+    background-color: #fff6ed; /* Light orange row background */
+    transition: background-color 0.3s ease;
+}
+
+table tr:hover {
+    background-color: #ffe8d9; /* Slightly lighter on hover */
+}
+
+table img {
+    border-radius: 10px;
+    width: 50px;
+    height: 50px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.edit-btn, .delete-btn {
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-weight: 600;
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    display: inline-block;
+    transition: all 0.3s ease-in-out;
+}
+
+.edit-btn {
+    background-color: #ffcc66; /* Lighter orange */
+}
+
+.delete-btn {
+    background-color: #ff4d4d; /* Soft red */
+}
+
+.edit-btn:hover {
+    background-color: #ffa366; /* Brighter orange */
+    transform: scale(1.05);
+}
+
+.delete-btn:hover {
+    background-color: #e63939; /* Slightly darker red */
+    transform: scale(1.05);
+}
+
+.edit-btn:active, .delete-btn:active {
+    transform: scale(0.98);
+}
+
+hr {
+    border: 0;
+    border-top: 3px solid #ffe0cc; /* Orange separator */
+    margin: 50px 0;
+}
+
+/* Floating Shadow Effect on Menu Items */
+.menu-items-section table tr {
+    box-shadow: 0 4px 10px rgba(255, 102, 0, 0.1);
+    transition: all 0.3s ease-in-out;
+}
+
+.menu-items-section table tr:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 15px rgba(255, 102, 0, 0.2);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 20px;
+        margin: 20px auto;
+    }
+
+    form input, form textarea, form select, form button {
+        font-size: 1em;
+    }
+
+    table th, table td {
+        padding: 14px;
+    }
+
+    table td, table th {
+        font-size: 0.9em;
+    }
+
+    table img {
+        width: 40px;
+        height: 40px;
+    }
+
+    h2 {
+        font-size: 1.8em;
+    }
+
+    /* Adjust button sizes for smaller screens */
+    form button {
+        font-size: 1em;
+        padding: 14px 24px;
+    }
+}

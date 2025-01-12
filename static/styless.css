@@ -1,0 +1,352 @@
+/* Reset and base styles */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+body {
+    background-color: #fff5eb;
+    color: #2d3748;
+    line-height: 1.6;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+/* Tracking Section */
+.tracking-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 0;
+    position: relative;
+}
+
+.step {
+    text-align: center;
+    position: relative;
+}
+
+.circle {
+    width: 30px;
+    height: 30px;
+    background-color: #ccc;
+    border-radius: 50%;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+.progress-bar {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    height: 5px;
+    width: 100%;
+    background-color: #ddd;
+    z-index: 1;
+    transform: translateY(-50%);
+}
+
+.progress-bar-fill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 5px;
+    background-color: green;
+    width: 0%;
+    z-index: 2;
+    transition: width 1s ease-in-out;
+}
+
+.step {
+    text-align: center;
+    flex: 1;
+    z-index: 3;
+}
+
+
+.step p {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.tracking-container::before {
+    content: "";
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background-color: #ccc;
+    z-index: 1;
+}
+
+.step .circle.active {
+    background-color: green;
+}
+
+.tracking-container .active ~ .circle {
+    background-color: #ccc !important;
+}
+
+.tracking-container::before.active {
+    background-color: green;
+}
+
+/* Header styles */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    margin-bottom: 30px;
+    border-bottom: 2px solid #ffead5;
+}
+
+h1 {
+    font-size: 2rem;
+    color: #f97316;
+    font-weight: 700;
+}
+
+/* Section styles */
+section {
+    background: white;
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: 0 2px 4px rgba(249, 115, 22, 0.1);
+}
+
+h2 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+    color: #ea580c;
+}
+
+h3 {
+    font-size: 1.2rem;
+    color: #f97316;
+    margin: 16px 0;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #ffead5;
+}
+
+/* Cart item styles */
+.cart-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 16px;
+    margin: 8px 0;
+    background: #fff8f3;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.cart-item:hover {
+    background: #ffead5;
+}
+
+.cart-item p {
+    margin: 0;
+    flex: 1;
+}
+
+/* Button styles */
+button {
+    padding: 8px 16px;
+    border-radius: 6px;
+    border: none;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background: #f97316;
+    color: white;
+    margin: 0 4px;
+}
+
+button:hover {
+    background: #ea580c;
+    transform: translateY(-1px);
+}
+
+button:active {
+    transform: translateY(0);
+}
+
+/* Select styles */
+select {
+    width: 100%;
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px solid #ffead5;
+    background: white;
+    font-size: 1rem;
+    margin: 8px 0;
+    cursor: pointer;
+}
+/* Order Success Container */
+.order-success-container {
+    display: none;
+    text-align: center;
+    margin-top: 20px;
+}
+
+.success-checkmark {
+    width: 80px;
+    height: 80px;
+    background-color: green;
+    color: white;
+    border-radius: 50%;
+    font-size: 40px;
+    line-height: 80px;
+    margin: 0 auto;
+}
+
+.success-message {
+    font-size: 24px;
+    margin-top: 20px;
+    color: #333;
+    font-weight: bold;
+}
+
+/* Success animation styles */
+.order-success-container {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    z-index: 1000;
+}
+
+.success-checkmark {
+    width: 100px;
+    height: 100px;
+    margin: 0 auto 20px;
+}
+
+.check-icon {
+    width: 100px;
+    height: 100px;
+    position: relative;
+    border-radius: 50%;
+    box-sizing: content-box;
+    padding: 0;
+}
+
+.check-icon::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background-color: #4CAF50;
+    animation: scale-in 0.3s ease-in-out;
+}
+
+.check-icon::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 28px;
+    width: 25px;
+    height: 50px;
+    border-right: 4px solid white;
+    border-top: 4px solid white;
+    transform-origin: right top;
+    transform: scaleX(-1) rotate(135deg) translateY(-50%);
+    animation: check-mark 0.4s ease-in-out 0.3s forwards;
+    opacity: 0;
+}
+
+.success-message {
+    color: #4CAF50;
+    font-size: 24px;
+    font-weight: 600;
+    opacity: 0;
+    animation: fade-in 0.3s ease-in-out 0.7s forwards;
+}
+
+/* Animations */
+@keyframes scale-in {
+    0% {
+        transform: scale(0);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+@keyframes check-mark {
+    0% {
+        width: 0;
+        height: 0;
+        opacity: 0;
+    }
+    100% {
+        width: 25px;
+        height: 50px;
+        opacity: 1;
+    }
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    body {
+        padding: 16px;
+    }
+    
+    header {
+        flex-direction: column;
+        text-align: center;
+        gap: 16px;
+    }
+    
+    .cart-item {
+        flex-direction: column;
+        text-align: center;
+        gap: 12px;
+    }
+    
+    button {
+        width: 100%;
+        margin: 4px 0;
+    }
+
+    .order-success-container {
+        width: 90%;
+        padding: 20px;
+    }
+}
+
+/* Confirm order button */
+#confirm-order button {
+    width: 100%;
+    padding: 16px;
+    font-size: 1.1rem;
+    background: #f97316;
+    margin-top: 16px;
+}
+
+#confirm-order button:hover {
+    background: #ea580c;
+}
